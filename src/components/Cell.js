@@ -3,7 +3,7 @@ import React from 'react'
 const Cell = (props) =>{
 	let {x, y, cellStatus, onCellClick} = props;
 	
-	let status = null;
+	let status = cellStatus;
 
 	switch(cellStatus){
 		case 'Hit':

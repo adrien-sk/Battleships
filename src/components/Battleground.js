@@ -2,7 +2,7 @@ import React from 'react'
 import Cell from './Cell'
 
 const Battleground = (props) => {
-	let { board, onCellClick } = props;
+	let { board, onStartGameClick, onCellClick } = props;
 	let element;
 
 	if(board){
@@ -15,6 +15,9 @@ const Battleground = (props) => {
 				</div>
 			)
 		});
+	}
+	else{
+		element = <button onClick={() => onStartGameClick()}>Start a game</button>
 	}
 
 	return(

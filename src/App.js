@@ -4,7 +4,7 @@ import './styles/site.scss';
 import UI from './components/UI'
 import Battleground from './components/Battleground'
 
-import GenerateBoard from './functions/GenerateBoard'
+import generateBoard from './functions/GenerateBoard'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -20,11 +20,14 @@ class App extends React.Component {
 	}
 
 	componentDidMount(){
-		let newBoard = GenerateBoard();
+	}
+
+	initiateGame(){
+		let newBoard = generateBoard();
 		this.setState({board: newBoard});
 	}
 
-	onCellClick(x, y){
+	handleCellClick(x, y){
 		alert(x+', '+y);
 	}
 
@@ -35,7 +38,7 @@ class App extends React.Component {
 					<h1>Battleships</h1>
 				</header>
 				<main>
-					{ <Battleground board={this.state.board} onCellClick={(x, y) => this.onCellClick(x, y)} /> }
+					{ <Battleground board={this.state.board} onCellClick={(x, y) => this.handleCellClick(x, y)} onStartGameClick={() => this.initiateGame()} /> }
 					<UI />
 				</main>
 				<footer>

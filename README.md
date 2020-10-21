@@ -1,2 +1,1 @@
-# Battleships
-React Battleships singleplayer game
+## Battleships React singleplayer game

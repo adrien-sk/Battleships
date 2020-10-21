@@ -17,6 +17,9 @@ const Cell = (props) =>{
 		case 'Empty':
 			status = <p>Empty</p>;
 			break;
+
+		default:
+			break;
 	}
 
 	const onClick = (x, y) => {
@@ -26,7 +29,7 @@ const Cell = (props) =>{
 	return(
 		<div key={x+'-'+y} className="cell" onClick={() => onClick(x, y)}>
 			{
-				x+'-'+y
+				status
 			}
 		</div>
 	);

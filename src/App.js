@@ -39,7 +39,7 @@ class App extends React.Component {
 					<UI />
 				</main>
 				<footer>
-					<a href="https://github.com/Nadrielle/Battleships" className="github-link" target="_blank">{element}<p>Github Repository</p></a>
+					<a href="https://github.com/Nadrielle/Battleships" rel="noopener noreferrer" className="github-link" target="_blank">{element}<p>Github Repository</p></a>
 				</footer>
 			</div>
 		);

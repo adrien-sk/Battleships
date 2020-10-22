@@ -27,13 +27,62 @@ main{
 				border: 1px solid black;
 				border-right: none;
 				border-bottom: none;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
 
 				&.hit{
-					background-color: orangered;
+					background-color: rgb(255, 222, 210);
+					
+					&::after{
+						content: "";
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background-color: orangered;
+						z-index: 1;
+						border-radius: 100%;
+						animation: flare .9s cubic-bezier(.19,.78,.66,1.01) forwards;
+					}
 				}
 
 				&.miss{
-					background-color: grey;
+					background-color: rgb(223, 223, 223);
+					
+					&::after{
+						content: "";
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						border: 2px solid rgb(0, 183, 255);
+						z-index: 1;
+						border-radius: 100%;
+						animation: flare .9s cubic-bezier(.19,.78,.66,1.01) forwards;
+					}
+				}
+
+				img{
+					//transition: all .5s ease 0;
+					z-index: 10;
+					position: relative;
+					opacity: 0;
+
+					&.hit{
+						animation: explosion-icon 0.3s .5s forwards; 
+					}
+	
+					&.miss{
+						animation: miss-icon 0.3s .2s forwards; 
+						background-color: rgb(235, 235, 235);
+						width: 25%;
+						height: 25%;
+					}
 				}
 			}
 		}
@@ -42,4 +91,24 @@ main{
 
 footer{
 	text-align: center;
+}
+
+
+/* Animations */
+
+@keyframes miss-icon {
+	0%   { opacity: 0; }
+	100% { opacity: 0.5; }
+}
+
+@keyframes explosion-icon {
+	0%   { scale: 0; }
+	50%   { scale: 2; }
+	100% { scale: 1; opacity: 1;}
+}
+
+@keyframes flare {
+	0%   { scale: 0; opacity: 0; }
+	50%   {  opacity: 1; }
+	100% { scale: 1.5; opacity: 0; }
 }

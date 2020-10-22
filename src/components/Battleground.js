@@ -18,12 +18,10 @@ const Battleground = (props) => {
 			});
 		}
 		else{
-			return(
-				<div>
-					<p>Game over</p>
-					<button onClick={() => onStartGameClick()}>Start a game</button>
-				</div>
-			);
+				element = 	<div>
+								<p>Game over</p>
+								<button onClick={() => onStartGameClick()}>Start a game</button>
+							</div>
 		}
 	}
 	else{

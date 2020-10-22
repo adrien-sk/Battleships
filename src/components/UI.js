@@ -1,19 +1,17 @@
 import React from 'react'
 
-const UI = () => {
-	//let grid = <p>test</p>;
-	/*for (let i = 0; i < 10; i++) {
-		let grid = array[i];
-		
-		for (let j = 0; j < 10; j++) {
-			let element = array[j];
-			
-		}
-	}*/
-
+const UI = (props) => {
+	let {hits, fails} = props;
 	return(
 		<div className="ui-panel">
-			
+			<div className="hits">
+				<p className="score-number">{hits}</p>
+				<p className="score-title">Hits</p>
+			</div>
+			<div className="fails">
+				<p className="score-number">{fails}</p>
+				<p className="score-title">Fails</p>
+			</div>
 		</div>
 	);
 }

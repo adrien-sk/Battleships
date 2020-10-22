@@ -11,13 +11,14 @@ body{
 header{
 	text-align: center;
 	margin-bottom: 50px;
-	margin-top: 25px;
+	padding-top: 25px;
 
 	h1{
 		font-family: 'Staatliches', cursive;
 		letter-spacing: 2px;
 		font-size: 70px;
 		transform: skewX(-10deg);
+		display: inline-block;
 	}
 }
 
@@ -70,12 +71,6 @@ main{
 			}
 		}
 
-		.gameover{
-			p{
-				margin-bottom: 25px;
-			}
-		}
-
 		.board{
 			animation: battleground-appear 1s cubic-bezier(.19,.78,.66,1.01) forwards;
 
@@ -98,6 +93,7 @@ main{
 					border: 1px solid black;
 					border-top: none;
 					border-left: none;
+					text-transform: capitalize;
 					
 					&:first-child{
 						border-left: 1px solid black;
@@ -116,7 +112,7 @@ main{
 							background-color: orangered;
 							z-index: 1;
 							border-radius: 100%;
-							animation: flare .9s cubic-bezier(.19,.78,.66,1.01) forwards;
+							animation: flare .5s cubic-bezier(.19,.78,.66,1.01) forwards;
 						}
 					}
 	
@@ -138,13 +134,12 @@ main{
 					}
 	
 					img{
-						//transition: all .5s ease 0;
 						z-index: 10;
 						position: relative;
 						opacity: 0;
 	
 						&.hit{
-							animation: explosion-icon 0.3s .5s forwards; 
+							animation: explosion-icon 0.2s .2s forwards; 
 						}
 		
 						&.miss{
@@ -178,7 +173,59 @@ main{
 					animation: title-appear 1s 0.5s cubic-bezier(.19,.78,.66,1.01) forwards;
 					position: relative;
 					opacity: 0;
+
+					& > span{
+						color: $button-text-color;
+					}
 				}
+
+				.victory-score-title{
+					font-size: 60px;
+				}
+
+				.victory-score-number{
+					font-size: 60px;
+					color: $button-text-color;
+					line-height: 60px;
+					margin-top: 10px;
+				}
+
+				.victory-score-number-label{
+					font-size: 30px;
+				}
+
+				.victory-score-fails{
+					font-size: 26px;
+					margin-top: 20px;
+				}
+			}
+		}
+	}
+
+	.ui-panel{
+		display: flex;
+		flex-direction: revert;
+		justify-content: center;
+
+		div{
+			background-color: $miss-color;
+			width: 100px;
+			height: 100px;
+			margin: 15px; 
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-evenly;
+
+			p.score-number{
+				font-weight: 400;
+				font-size: 24px;
+			}
+			
+			p.score-title{
+				text-transform: uppercase;
+				font-weight: 400;
+				letter-spacing: 1px;	
 			}
 		}
 	}

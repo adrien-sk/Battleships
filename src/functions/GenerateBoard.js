@@ -28,9 +28,9 @@ const generateShipsPosition = (board, ships) => {
 	for(let i=0;i<ships.length;i++){
 		for(let j=0;j<ships[i].number;j++){
 			let positions = getFreePositions(newBoard, ships[i]);
-			console.log(positions);
+			//console.log(positions);
 			for(let k=0;k<positions.length;k++){
-				newBoard[positions[k][0]][positions[k][1]] = ships[i].name;
+				newBoard[positions[k][0]][positions[k][1]] = 'Ship';//ships[i].name;
 			}
 		}
 	}

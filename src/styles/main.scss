@@ -27,6 +27,14 @@ main{
 				border: 1px solid black;
 				border-right: none;
 				border-bottom: none;
+
+				&.hit{
+					background-color: orangered;
+				}
+
+				&.miss{
+					background-color: grey;
+				}
 			}
 		}
 	}

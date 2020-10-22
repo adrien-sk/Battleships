@@ -2,20 +2,14 @@ import React from 'react'
 
 const Cell = (props) =>{
 	let {x, y, cellStatus, onCellClick} = props;
-	
-	let status = cellStatus;
-
+	let cellClass;
 	switch(cellStatus){
 		case 'Hit':
-			status = <p>Hit</p>;
+			cellClass = 'hit';
 			break;
 
-		case 'Sunk':
-			status = <p>Sunk</p>;
-			break;
-
-		case 'Empty':
-			status = <p>Empty</p>;
+		case 'Miss':
+			cellClass = 'miss';
 			break;
 
 		default:
@@ -23,13 +17,13 @@ const Cell = (props) =>{
 	}
 
 	const onClick = (x, y) => {
-		onCellClick(x, y);
+		if(cellStatus !== 'Hit')
+			onCellClick(x, y);
 	}
 
 	return(
-		<div key={x+'-'+y} className="cell" onClick={() => onClick(x, y)}>
+		<div key={x+'-'+y} className={`cell ${cellClass}`} onClick={() => onClick(x, y)}>
 			{
-				status
 			}
 		</div>
 	);

@@ -38,6 +38,9 @@ class App extends React.Component {
 					tempBoard[x][y] = 'Hit';
 					tempHealthPoints--;
 					break;
+				
+				default:
+					break;
 			}
 		}
 		this.setState({board: tempBoard, healthPoints: tempHealthPoints});

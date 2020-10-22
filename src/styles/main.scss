@@ -1,88 +1,183 @@
+$background-color: #E0D3C2;
+$button-bg-color: #7C6E61;
+$button-text-color: #e4bd71;
+$hit-color: #ecb14b55;
+$miss-color: #AC9A88;
+
+body{
+	background-color: $background-color;
+}
+
 header{
 	text-align: center;
 	margin-bottom: 50px;
+	margin-top: 25px;
+
+	h1{
+		font-family: 'Staatliches', cursive;
+		letter-spacing: 2px;
+		font-size: 70px;
+		transform: skewX(-10deg);
+	}
 }
 
 main{
-	margin-bottom: 150px;
+	margin-bottom: 100px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
 
 	.battleground{
 		display: flex;
 		flex-direction: column;
+		position: relative;
 		width: 501px;
 		margin: auto;
-		border-bottom: 1px solid black;
-		border-right: 1px solid black;
+		text-align: center;
+		margin-bottom: 25px;
 
-		.row{
-			display: flex;
-			flex-direction: row;
-			/*border: 1px solid black;
-			border-top: none;
-			border-left: none;*/
+		button{
+			cursor: pointer;
+			background-color: $button-bg-color;
+			outline: none;
+			border: none;
+			color: $button-text-color;
+			padding: 15px 100px;
+			letter-spacing: 1px;
+			font-weight: 400;
+			position: relative;
 
-			.cell{
-				width: 50px;
-				height: 50px;
-				border: 1px solid black;
-				border-right: none;
-				border-bottom: none;
-				position: relative;
+			&:after{
+				content: "";
+				position: absolute;
+				top: 3px;
+				right: 3px;
+				bottom: 3px;
+				left: 3px;
+				border: 2px solid $button-text-color;
+				//background-color: red;
+
+				&:after{
+					content: "";
+					position: absolute;
+					top: 10px;
+					right: 10px;
+					bottom: 10px;
+					left: 10px;
+					//border: 2px solid $button-text-color;
+					background-color: red;
+					
+				}
+			}
+		}
+
+		.gameover{
+			p{
+				margin-bottom: 25px;
+			}
+		}
+
+		.board{
+			animation: battleground-appear 1s cubic-bezier(.19,.78,.66,1.01) forwards;
+
+			.row{
 				display: flex;
-				align-items: center;
-				justify-content: center;
-				cursor: pointer;
-
-				&.hit{
-					background-color: rgb(255, 222, 210);
-					
-					&::after{
-						content: "";
-						position: absolute;
-						top: 0;
-						left: 0;
-						width: 100%;
-						height: 100%;
-						background-color: orangered;
-						z-index: 1;
-						border-radius: 100%;
-						animation: flare .9s cubic-bezier(.19,.78,.66,1.01) forwards;
-					}
+				flex-direction: row;
+	
+				&:first-child .cell{
+					border-top: 1px solid black;
 				}
-
-				&.miss{
-					background-color: rgb(223, 223, 223);
-					
-					&::after{
-						content: "";
-						position: absolute;
-						top: 0;
-						left: 0;
-						width: 100%;
-						height: 100%;
-						border: 2px solid rgb(0, 183, 255);
-						z-index: 1;
-						border-radius: 100%;
-						animation: flare .9s cubic-bezier(.19,.78,.66,1.01) forwards;
-					}
-				}
-
-				img{
-					//transition: all .5s ease 0;
-					z-index: 10;
+	
+				.cell{
+					width: 50px;
+					height: 50px;
 					position: relative;
-					opacity: 0;
-
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					cursor: pointer;
+					border: 1px solid black;
+					border-top: none;
+					border-left: none;
+					
+					&:first-child{
+						border-left: 1px solid black;
+					}
+	
 					&.hit{
-						animation: explosion-icon 0.3s .5s forwards; 
+						background-color: $hit-color;
+						
+						&:after{
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							background-color: orangered;
+							z-index: 1;
+							border-radius: 100%;
+							animation: flare .9s cubic-bezier(.19,.78,.66,1.01) forwards;
+						}
 					}
 	
 					&.miss{
-						animation: miss-icon 0.3s .2s forwards; 
-						background-color: rgb(235, 235, 235);
-						width: 25%;
-						height: 25%;
+						background-color: $miss-color;
+						
+						&:after{
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							border: 2px solid rgb(0, 183, 255);
+							z-index: 1;
+							border-radius: 100%;
+							animation: flare .9s cubic-bezier(.19,.78,.66,1.01) forwards;
+						}
 					}
+	
+					img{
+						//transition: all .5s ease 0;
+						z-index: 10;
+						position: relative;
+						opacity: 0;
+	
+						&.hit{
+							animation: explosion-icon 0.3s .5s forwards; 
+						}
+		
+						&.miss{
+							animation: miss-icon 0.3s .2s forwards; 
+							width: 25%;
+							height: 25%;
+						}
+					}
+				}
+			}
+
+			.gameover{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 50;
+				background-color: rgba(0, 0, 0, 0.6);
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				animation: battleground-appear 2s cubic-bezier(.19,.78,.66,1.01) forwards;
+
+				p{
+					font-family: 'Staatliches', cursive;
+					color:white;
+					letter-spacing: 1px;
+					font-size: 35px;
+					animation: title-appear 1s 0.5s cubic-bezier(.19,.78,.66,1.01) forwards;
+					position: relative;
+					opacity: 0;
 				}
 			}
 		}
@@ -91,6 +186,18 @@ main{
 
 footer{
 	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
+
+	a{
+		color: rgb(47, 47, 47);
+		text-decoration: none;
+		transition: all .2s ease;
+
+		&:hover{
+			color: rgb(161, 161, 161);
+		}
+	}
 }
 
 
@@ -111,4 +218,19 @@ footer{
 	0%   { scale: 0; opacity: 0; }
 	50%   {  opacity: 1; }
 	100% { scale: 1.5; opacity: 0; }
+}
+
+@keyframes battleground-appear {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@keyframes battleground-appear {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@keyframes title-appear {
+	0%   { opacity: 0; left:-50px}
+	100% { opacity: 1; left: 0;}
 }

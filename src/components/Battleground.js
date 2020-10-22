@@ -6,26 +6,31 @@ const Battleground = (props) => {
 	let element;
 
 	if(board){
-		if(healthPoints > 0){
-			element = board.map((row, i) => {
-				return(
-					<div key={i} className="row">
-						{row.map((column, j) => {
-							return <Cell x={i} y={j} cellStatus={column} onCellClick={onCellClick} />
-						})}
+		element = 
+			<div className="board">
+				{board.map((row, i) => {
+					return(
+						<div key={i} className="row">
+							{row.map((column, j) => {
+								return <Cell x={i} y={j} cellStatus={column} onCellClick={onCellClick} />
+							})}
+						</div>
+					)
+				})}
+				{
+					healthPoints <= 0 && 
+					<div className="gameover">
+						<p>The flotilla has been defeated</p>
+						<button onClick={() => onStartGameClick()}>Start a new game</button>
 					</div>
-				)
-			});
-		}
-		else{
-				element = 	<div>
-								<p>Game over</p>
-								<button onClick={() => onStartGameClick()}>Start a game</button>
-							</div>
-		}
+				}
+			</div>
 	}
 	else{
-		element = <button onClick={() => onStartGameClick()}>Start a game</button>
+		element = 
+			<div className="inner">
+				<button onClick={() => onStartGameClick()}>Start a game</button>
+			</div>
 	}
 
 	return(

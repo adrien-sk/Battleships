@@ -53,7 +53,7 @@ class App extends React.Component {
 					<h1>Battleships</h1>
 				</header>
 				<main>
-					{ <Battleground board={this.state.board} healthPoints={this.state.healthPoints} onCellClick={(x, y) => this.handleCellClick(x, y)} onStartGameClick={() => this.initiateGame()} /> }
+					<Battleground board={this.state.board} healthPoints={this.state.healthPoints} onCellClick={(x, y) => this.handleCellClick(x, y)} onStartGameClick={() => this.initiateGame()} />
 					<UI />
 				</main>
 				<footer>

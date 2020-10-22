@@ -1,6 +1,6 @@
 <h1 align="center"> Battleships </h1>
 
-![Battleships](/docs/preview.png)
+![Battleships](/docs/preview_step2.png)
 
 A singleplayer SPA Battleships game created with Create-react-app 
 
@@ -12,12 +12,16 @@ The project is currently in development.
 
 #### Remaining tasks:
 
-* *To do : List the tasks*
+* In GenerateBoard.js : **getFreePositions** and **isPathFree** need refactoring, to avoid useless For loops.
+* Allow to see when a ship is completely destroyed (Change the cell visual)
+* Visual list of the ships and their current hit points and damage
 
 
 ## Project Screenshots
 
-![Battleships](/docs/preview.png)
+![Battleships](/docs/preview_step1.png)
+![Battleships](/docs/preview_step2.png)
+![Battleships](/docs/preview_step3.png)
 
 
 ## Installation and Setup Instructions

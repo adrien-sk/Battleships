@@ -2,6 +2,7 @@ import React from 'react'
 
 const UI = (props) => {
 	let {hits, fails} = props;
+	
 	return(
 		<div className="ui-panel">
 			<div className="hits">

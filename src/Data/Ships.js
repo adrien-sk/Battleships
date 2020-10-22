@@ -1,3 +1,5 @@
+// Composition of the flotilla
+// Can be modified manually or Dynamised if we want more ships or types
 export const ships = [
 	{
 		id: 0,
@@ -13,6 +15,7 @@ export const ships = [
 	}
 ];
 
+// Return total hit required for all the ships
 export const getShipsHp = () => {
 	let healthPoints = 0;
 	for(let i=0;i<ships.length;i++){

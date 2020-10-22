@@ -5,6 +5,7 @@ const Battleground = (props) => {
 	let { board,  healthPoints, onStartGameClick, onCellClick, hits, fails } = props;
 	let element;
 
+	// If the board is generated : Render the visual
 	if(board){
 		element = 
 			<div className="board">
@@ -18,6 +19,7 @@ const Battleground = (props) => {
 					)
 				})}
 				{
+					// If we destroyed all ships : Display Victory screen over the board
 					healthPoints <= 0 && 
 					<div className="gameover">
 						<p>The flotilla has been defeated</p>
@@ -32,10 +34,11 @@ const Battleground = (props) => {
 				}
 			</div>
 	}
+	// Else : Render Start button
 	else{
 		element = 
 			<div className="inner">
-				<button onClick={() => onStartGameClick()}>Start a game</button>
+				<button onClick={() => onStartGameClick()}>Start A Game</button>
 			</div>
 	}
 

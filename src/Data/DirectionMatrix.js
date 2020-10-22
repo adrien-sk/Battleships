@@ -1,24 +1,24 @@
 export const directions = [
 	{
-		//Right
+		// Right
 		id: 0,
 		x: 1,
 		y: 0
 	},
 	{
-		//Bottom
+		// Bottom
 		id: 1,
 		x: 0,
 		y: 1
 	},
 	{
-		//Left
+		// Left
 		id: 2,
 		x: -1,
 		y: 0
 	},
 	{
-		//Top
+		// Top
 		id: 3,
 		x: 0,
 		y: -1

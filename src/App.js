@@ -1,43 +1,51 @@
 import React from 'react';
 import './styles/site.scss';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+
 import UI from './components/UI'
 import Battleground from './components/Battleground'
 
 import generateBoard from './functions/GenerateBoard'
 import { getShipsHp } from './Data/Ships'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
+const gitIcon = <FontAwesomeIcon icon={faGithub} />
 
-const element = <FontAwesomeIcon icon={faGithub} />
 
 class App extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			board: null,
+			board: null,	
 			healthPoints: 0,
 			hits: 0,
 			fails: 0,
 		}
 	}
 
+	// Launch when clicking "Start a game"
+	// Function is sent to --> "Battleground" component
 	initiateGame(){
 		let newBoard = generateBoard();
 		this.setState({board: newBoard, healthPoints: getShipsHp(), hits: 0, fails: 0});
 	}
 
+	// Used when user click a Cell
+	// Function is sent to --> "Battleground" component --> "Cell" component
 	handleCellClick(x, y){
 		let tempBoard = [...this.state.board];
 		let tempHealthPoints = this.state.healthPoints;
 		let tempHits = this.state.hits;
 		let tempFails = this.state.fails;
+
+		// If the clicked cell is empty
 		if(tempBoard[x][y] === null){
 			tempBoard[x][y] = 'Miss';
 			tempFails += 1;
 		}
 		else{
+		// Else if : it contains a Ship
 			switch(tempBoard[x][y]){
 				case 'Ship':
 					tempBoard[x][y] = 'Hit';
@@ -49,6 +57,7 @@ class App extends React.Component {
 					break;
 			}
 		}
+
 		this.setState({board: tempBoard, healthPoints: tempHealthPoints, hits: tempHits, fails: tempFails});
 	}
 
@@ -71,7 +80,7 @@ class App extends React.Component {
 							fails={this.state.fails} />}
 				</main>
 				<footer>
-					<a href="https://github.com/Nadrielle/Battleships" rel="noopener noreferrer" className="github-link" target="_blank">{element}<p>Github Repository</p></a>
+					<a href="https://github.com/Nadrielle/Battleships" rel="noopener noreferrer" className="github-link" target="_blank">{gitIcon}<p>Github Repository</p></a>
 				</footer>
 			</div>
 		);

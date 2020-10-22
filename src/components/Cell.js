@@ -7,6 +7,8 @@ const Cell = (props) =>{
 	let {x, y, cellStatus, onCellClick} = props;
 	let cellClass;
 	let icon;
+
+	// Define Class and Icon depending on the Cell status
 	switch(cellStatus){
 		case 'Hit':
 			cellClass = 'hit';
@@ -22,8 +24,9 @@ const Cell = (props) =>{
 			break;
 	}
 
+	// When clicking a Cell : If it's not already clicked : Call App's Handle Click method with cell position
 	const onClick = (x, y) => {
-		if(cellStatus !== 'Hit')
+		if(cellStatus !== 'Hit' && cellStatus !== 'Miss')
 			onCellClick(x, y);
 	}
 

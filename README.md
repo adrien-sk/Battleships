@@ -4,35 +4,40 @@
 
 A singleplayer SPA Battleships game created with Create-react-app 
 
-You can have a look the Demo here : [adrien-s-battleships.netlify.app](https://adrien-s-battleships.netlify.app/)
+You can have a look the **Demo** here : [adrien-s-battleships.netlify.app](https://adrien-s-battleships.netlify.app/)
+
 
 ## Project Status
 The project is currently in development. 
 
 #### Remaining tasks:
 
-* [React.JS](https://reactjs.org/) : 16.13.1 : React.JS is used to provide a quick one-page web-application.
+* *To do : List the tasks*
+
 
 ## Project Screenshots
 
 ![Battleships](/docs/preview.png)
-![Battleships](/docs/preview.png)
+
 
 ## Installation and Setup Instructions
 
-You will need `node` and `npm` installed globally on your machine.  
+First, ensure you have [Node.JS](https://nodejs.org), and [Git](https://git-scm.com/) if you plan to clone the repository 
 
-Clone down this repository:
-`git clone https://github.com/Nadrielle/Battleships.git`
+```bash
+# Clone this repository
+git clone https://github.com/Nadrielle/Battleships.git
 
-Installation:
+# Go into the repository
+cd Battleships
 
-`npm install`
+# Install dependencies
+npm install
 
-To Start Server:
+# Start the Server
+npm start
+```
 
-`npm start`
 
-To Visit App:
-
-`localhost:3000/`
+## License
+MIT

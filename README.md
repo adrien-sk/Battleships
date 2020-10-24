@@ -15,6 +15,7 @@ The project is currently in development.
 * In GenerateBoard.js : **getFreePositions** and **isPathFree** need refactoring, to avoid useless For loops.
 * Allow to see when a ship is completely destroyed (Change the cell visual)
 * Visual list of the ships and their current hit points and damage.
+* Should I had a cell space between ships during generation ?
 * Has a *best hit streak* stat
 * Mobile responsive design
 

@@ -17,6 +17,7 @@ The project is currently in development.
 * Visual list of the ships and their current hit points and damage.
 * Should I had a cell space between ships during generation ?
 * Has a *best hit streak* stat
+* Add testings
 * Mobile responsive design
 
 

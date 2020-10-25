@@ -1,5 +1,5 @@
 import { ships } from '../Data/Ships'
-import { directions } from '../Data/DirectionMatrix'
+import { directions, surroundingCells } from '../Data/DirectionMatrix'
 
 // Return a 10x10 array with { ships } spread out
 const generateBoard = () => {
@@ -40,7 +40,7 @@ const generateShipsPosition = (board, ships) => {
 		for(let j=0;j<ships[i].number;j++){
 
 			// Get each cell position for this ship
-			let positions = getFreePositions(newBoard, ships[i]);
+			let positions = getShipPosition(newBoard, ships[i]);
 			
 			// For each cell position
 			for(let k=0;k<positions.length;k++){
@@ -55,7 +55,7 @@ const generateShipsPosition = (board, ships) => {
 
 // Generate a random Position
 // And return each cell position for a ship
-const getFreePositions = (board, ship) => {
+const getShipPosition = (board, ship) => {
 	let positionFound = false;
 	let positions;
 
@@ -65,54 +65,139 @@ const getFreePositions = (board, ship) => {
 		let x = getRandomNumber(9);
 		let y = getRandomNumber(9);
 
-		// If starting cell is free & It allows to place the entire ship :
-		//		"cells" = All Cells for this ship
-		//	Else : 
-		//		"cells" = False
-		let cells = isPathFree(board, ship, x, y);
+		// If starting cell and its surrounding is free
+		if(isCellValid(board, x, y)){
 
-		// If starting cell is free & We have Cells
-		if(board[x][y] === null && cells){
-			//Break the while
-			positionFound = true;
-			positions = cells;
+			// If it allows to place the entire ship && surrounding cells are free:
+			//		cells = All Cells for this ship
+			//	Else : 
+			//		cells = False
+			let cells = getCellsOrNull(board, ship, x, y);
+
+			// If we have Cells
+			if(cells){
+				// Break the while
+				positionFound = true;
+				positions = cells;
+			}
+			// Else : Start "While" again with a new random position
 		}
 	}
 	return positions;
 }
 
-// Given a random position : Verify this position and the space for the entire ship
+// Given a random position : Verify this position & the space for the entire ship & surrounding cells
 // Return a list of Cells for this ship to be inserted in
-const isPathFree = (board, ship, x, y) => {
-
-	//Get a random direction from DirectionMatrix
-	let direction = directions[getRandomNumber(3)];
+const getCellsOrNull = (board, ship, x, y) => {
 	let cells = [];
 
-	// For each cell size of the ship
-	for(let i=0;i<ship.size;i++){
-		//Predict next cell position according Direction
-		let newX = x+(i*direction.x);
-		let newY = y+(i*direction.y);
+	// True when all cells are found for this ship
+	let allCellsFound = false;
 
-		// If cell is not out of boundaries & the cell is not occupied
-		if((x+direction.x*(ship.size-1) >= 0 && x+direction.x*(ship.size-1) <= 9) && (y+direction.y*(ship.size-1) >= 0 && y+direction.y*(ship.size-1) <= 9) && board[newX][newY] === null){
-			// Add the cell to the list
-			cells.push([newX,newY]);
-		}
-		// Else if out of boundaries or cell occupied : 
-		// Return False
-		else{
+	// Array of already tried directions
+	let triedDirections = [];
+
+	// While we didn't found all the cells : It means we try again with another direction
+	while(!allCellsFound){
+
+		// Get a random direction from DirectionMatrix
+		let randomDirection = null;
+		let tryDirection;
+
+		// If we tried all Top, Right, Bottom, Left
+		// Return False (= Not a good starting cell)
+		if(triedDirections.length >= 4){
 			return false;
+		}
+
+		// Find a new random direction -> randomDirection
+		do{
+			tryDirection = directions[getRandomNumber(3)];
+			if(!triedDirections.includes(tryDirection, 0)){
+				randomDirection = tryDirection;
+			}
+		}
+		while(triedDirections.includes(tryDirection, 0));
+
+		triedDirections.push(randomDirection);
+		
+		// First, check if last cell of the ship is out of boundaries
+		let lastCellX = x + ((ship.size - 1) * randomDirection.x);
+		let lastCellY = y + ((ship.size - 1) * randomDirection.y);
+
+		if(isInsideBoundaries(lastCellX, lastCellY)){
+
+			// Second, check if all following cells of the ship and their surrounding are empty
+			for(let i=0;i<ship.size;i++){
+				// Predict next cell position according randomDirection
+				let newX = x + (i * randomDirection.x);
+				let newY = y + (i * randomDirection.y);
+		
+				// If cell is not out of boundaries & the cell is not occupied
+				if(isCellValid(board, newX, newY)){
+					// Add the cell to the list
+					cells.push([newX,newY]);
+					
+					// If last cell of the ship
+					if(i === ship.size-1)
+						allCellsFound = true;
+				}
+				// Else if : out of boundaries or cell occupied : 
+				// Not a valid direction : flush saved cells and restart the While
+				else{
+					cells = [];
+					break;
+				}
+			}
 		}
 	}
 	
 	return cells;
 }
 
+// Check if the cell is empty & if surrounding cells are empty
+const isCellValid = (board, x, y) => {
+	// If the cell is empty
+	if(board[x][y] === null){
+		// Check surrounding of the cell
+		return areSurroundingCellsEmpty(board, x, y);
+	}
+	else{
+		return false;
+	}
+}
+
+// Check if all surrounding cells of a position are empty
+// (We don't check if surrounding cell outside the board is empty : because we allow a ship to be next to a board side)
+const areSurroundingCellsEmpty = (board, x, y) => {
+	// For each cell around [x,y]
+	for(let i=0;i<surroundingCells.length;i++){
+		let newX = x+surroundingCells[i].x;
+		let newY = y+surroundingCells[i].y;
+
+		// If the cell is inside the board & is not null : Return false
+		if(isInsideBoundaries(newX, newY) && board[newX][newY] !== null){
+			return false;
+		}
+	}
+
+	return true;
+}
+
 // Return random number from [0 to max]
 const getRandomNumber = (max) => {
 	return Math.floor(Math.random() * (max+1));
+}
+
+// Check if the cell inside the boundaries of the board
+const isInsideBoundaries = (x, y) =>{
+	if((x >= 0 && x <= 9) && (y >= 0 && y <= 9))
+	{
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 export default generateBoard;

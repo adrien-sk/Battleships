@@ -20,6 +20,12 @@ const Cell = (props) =>{
 			icon = <img src={miss} className='icon miss' alt='miss' />
 			break;
 
+		// Uncomment to debug by displaying cells with ships
+		/*case 'Ship':
+			cellClass = 'ship';
+			icon = <p>X</p>
+			break;*/
+
 		default:
 			break;
 	}

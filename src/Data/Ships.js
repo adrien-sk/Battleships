@@ -3,15 +3,27 @@
 export const ships = [
 	{
 		id: 0,
-		name: 'Battleship',
+		name: 'Carrier',
 		size: 5,
 		number: 1
 	},
 	{
 		id: 1,
-		name: 'Destroyer',
+		name: 'Battleship',
 		size: 4,
+		number: 1
+	},
+	{
+		id: 2,
+		name: 'Destroyer',
+		size: 3,
 		number: 2
+	},
+	{
+		id: 3,
+		name: 'Patrol Boat',
+		size: 2,
+		number: 1
 	}
 ];
 

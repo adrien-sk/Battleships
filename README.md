@@ -8,7 +8,7 @@ You can have a look the **Demo** here : [adrien-s-battleships.netlify.app](https
 
 
 ## Project Status
-The project is currently in development. 
+The project is currently in development.
 
 #### Remaining tasks:
 

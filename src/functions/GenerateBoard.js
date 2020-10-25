@@ -31,7 +31,7 @@ const createEmptyBoard = () =>{
 // Given an empty board
 // Return randomly populated board with { ships }
 const generateShipsPosition = (board, ships) => {
-	let newBoard = [...board];
+	let newBoard = JSON.parse(JSON.stringify(board));
 
 	// For each ship type
 	for(let i=0;i<ships.length;i++){

@@ -21,6 +21,8 @@ class App extends React.Component {
 			healthPoints: 0,
 			hits: 0,
 			fails: 0,
+			streak: 0,
+			bestStreak: 0,
 		}
 	}
 
@@ -28,7 +30,7 @@ class App extends React.Component {
 	// Function is sent to --> "Battleground" component
 	initiateGame(){
 		let newBoard = generateBoard();
-		this.setState({board: newBoard, healthPoints: getShipsHp(), hits: 0, fails: 0});
+		this.setState({board: newBoard, healthPoints: getShipsHp(), hits: 0, fails: 0, streak: 0});
 	}
 
 	// Used when user click a Cell
@@ -38,11 +40,14 @@ class App extends React.Component {
 		let tempHealthPoints = this.state.healthPoints;
 		let tempHits = this.state.hits;
 		let tempFails = this.state.fails;
+		let tempStreak = this.state.streak;
+		let tempBestStreak = this.state.bestStreak;
 
 		// If the clicked cell is empty
 		if(tempBoard[x][y] === null){
 			tempBoard[x][y] = 'Miss';
 			tempFails += 1;
+			tempStreak = 0;
 		}
 		else{
 		// Else if : it contains a Ship
@@ -51,6 +56,9 @@ class App extends React.Component {
 					tempBoard[x][y] = 'Hit';
 					tempHealthPoints--;
 					tempHits += 1;
+					tempStreak += 1;
+					if(tempBestStreak < tempStreak)
+						tempBestStreak = tempStreak;
 					break;
 				
 				default:
@@ -58,7 +66,7 @@ class App extends React.Component {
 			}
 		}
 
-		this.setState({board: tempBoard, healthPoints: tempHealthPoints, hits: tempHits, fails: tempFails});
+		this.setState({board: tempBoard, healthPoints: tempHealthPoints, hits: tempHits, fails: tempFails, streak: tempStreak, bestStreak: tempBestStreak});
 	}
 
 	render(){
@@ -77,7 +85,8 @@ class App extends React.Component {
 						fails={this.state.fails}/>
 					{this.state.board && 
 						<UI hits={this.state.hits} 
-							fails={this.state.fails} />}
+							fails={this.state.fails}
+							streak={this.state.bestStreak} />}
 				</main>
 				<footer>
 					<a href="https://github.com/Nadrielle/Battleships" rel="noopener noreferrer" className="github-link" target="_blank">{gitIcon}<p>Github Repository</p></a>

@@ -1,10 +1,14 @@
 import React from 'react'
 
 const UI = (props) => {
-	let {hits, fails} = props;
+	let {streak, hits, fails} = props;
 	
 	return(
 		<div className="ui-panel">
+			<div className="streak">
+				<p className="score-number">{streak}</p>
+				<p className="score-title">Best Streak</p>
+			</div>
 			<div className="hits">
 				<p className="score-number">{hits}</p>
 				<p className="score-title">Hits</p>

@@ -14,7 +14,6 @@ The project is currently in development.
 
 * Allow to see when a ship is completely destroyed (Change the cell visual)
 * Visual list of the ships and their current hit points and damage.
-* Has a *best hit streak* stat
 * Add testings
 * Mobile responsive design
 

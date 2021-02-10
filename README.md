@@ -31,7 +31,7 @@ First, ensure you have [Node.JS](https://nodejs.org), and [Git](https://git-scm.
 
 ```bash
 # Clone this repository
-git clone https://github.com/Nadrielle/Battleships.git
+git clone https://github.com/adrien-sk/Battleships.git
 
 # Go into the repository
 cd Battleships

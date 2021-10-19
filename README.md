@@ -4,7 +4,7 @@
 
 A singleplayer SPA Battleships game created with Create-react-app 
 
-You can have a look the **Demo** here : [adrien-s-battleships.netlify.app](https://adrien-s-battleships.netlify.app/)
+You can have a look at the **Demo** here : [adrien-s-battleships.netlify.app](https://adrien-s-battleships.netlify.app/)
 
 
 ## Project Status
